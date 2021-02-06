@@ -1,0 +1,191 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 	xmlns:task="http://www.springframework.org/schema/task"
+    xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" 
+	xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd http://www.springframework.org/schema/context 
+  	http://www.springframework.org/schema/context/spring-context-4.2.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/data/jpa
+    http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/task
+	http://www.springframework.org/schema/task/spring-task-3.0.xsd" >
+
+	<mvc:resources mapping="/*.*"
+		location="/, classpath:/WEB-INF/" />
+	<mvc:view-controller path="/" view-name="index.html" />
+	<mvc:annotation-driven />
+
+	<context:component-scan base-package="com.helius.controllers" />
+	<context:component-scan base-package="com.helius.service" />
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- one of the properties available; the maximum file size in bytes -->
+		<property name="maxUploadSize" value="500000000" />
+	</bean>
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<!-- <property name="url" value="jdbc:mysql://localhost:3306/invoicedah?zeroDateTimeBehavior=convertToNull&amp;useEncoding=true&amp;characterEncoding=UTF-8" />
+		<property name="username" value="root" />
+		<property name="password" value="1234" />-->
+	<property name="url" value="jdbc:mysql://13.234.100.223:3306/helius_app?zeroDateTimeBehavior=convertToNull&amp;useEncoding=true&amp;characterEncoding=UTF-8" />
+		<property name="username" value="vinay_app" />
+		<property name="password" value="123" />
+	
+		<!-- testonborrow and validationquery prooperty is to hand database connection expire exception -->
+		<property name="testOnBorrow" value="true" />
+		<property name="validationQuery" value="SELECT 1" />
+	</bean>
+	<bean id="hibernate3AnnotatedSessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="annotatedClasses">
+			<list>
+				<value>com.helius.entities.Employee_Personal_Details</value>
+				<value>com.helius.entities.Employee_Professional_Details</value>
+				<value>com.helius.entities.Employee_Identification_Details</value>
+				<value>com.helius.entities.Employee_Work_Permit_Details</value>
+				<value>com.helius.entities.Employee_Salary_Details</value>
+				<value>com.helius.entities.Employee_Assignment_Details</value>
+				<value>com.helius.entities.Users</value>
+				<value>com.helius.entities.Employee_Selfcare_Users</value>
+				<value>com.helius.entities.Skill</value>
+				<value>com.helius.entities.Certification</value>
+				<value>com.helius.entities.Country_Master</value>
+				<value>com.helius.entities.Work_Permit_Master</value>
+				<value>com.helius.entities.Sow_Details</value>
+				<value>com.helius.entities.Sow_Details_History</value>
+				<value>com.helius.entities.Contact_Address_Details</value>
+				<value>com.helius.entities.Emergency_Contact_Details</value>
+				<value>com.helius.entities.Employee_Appraisal_Details</value>
+				<value>com.helius.entities.Employee_Bank_Details</value>
+				<value>com.helius.entities.Employee_Offer_Details</value>
+				<value>com.helius.entities.Employee_On_Boarding_Checklist</value>
+				<value>com.helius.entities.Employee_Terms_And_Conditions</value>
+				<value>com.helius.entities.Indian_Employees_Insurance_Details</value>
+				<value>com.helius.entities.Indian_Employee_Family_Member</value>
+				<value>com.helius.entities.Singapore_Employee_Insurance_Details</value>
+				<value>com.helius.entities.Singapore_Employee_Family_Member</value>
+				<value>com.helius.entities.Employee_Leaves_Eligibility</value>
+				<!-- <value>com.helius.entities.Client_Billing_Address</value>	 -->			
+				<value>com.helius.entities.ClientDetail</value>
+				<value>com.helius.entities.ClientGroupDetail</value>
+				<value>com.helius.entities.ClientGroupLeavePolicy</value>
+				<value>com.helius.entities.ClientGroupReimbursementCategory</value>
+				<value>com.helius.entities.ClientGroupReimbursementPolicy</value>
+				<!-- <value>com.helius.entities.Client_Invoicing</value> -->
+				<value>com.helius.entities.ClientLeavePolicy</value>
+				<value>com.helius.entities.ClientReimbursementCategory</value>
+				<value>com.helius.entities.ClientReimbursementPolicy</value>
+				<value>com.helius.entities.Employee_Checklist_Items</value>
+				<value>com.helius.entities.Employee_Checklist_Master</value>
+				<value>com.helius.entities.User</value>
+				<value>com.helius.entities.MyRevision</value>
+				<value>com.helius.entities.Sow_Employee_Association</value>		
+				<value>com.helius.entities.Sow_Ctc_Breakup</value>	
+				<value>com.helius.entities.Sow_Billing_Schedule</value>			
+				<!-- <value>com.helius.entities.Client_Sub_Group_Detail</value> -->
+				<value>com.helius.entities.Employee_Timesheet_Status</value>
+			 	<value>com.helius.entities.Timesheet_Email</value>
+			 	<value>com.helius.entities.Help_Videos</value>
+			 	<value>com.helius.entities.Leave_Eligibility_Details</value>
+			 	<value>com.helius.entities.Leave_Usage_Details</value>
+			 	<value>com.helius.entities.Leave_Record_Details</value>
+			 	<value>com.helius.entities.Client_Leave_Policy_New</value>
+			 	<value>com.helius.entities.Employee_Beeline_Timesheet</value>
+			 	<value>com.helius.entities.Employee_Beeline_Details</value>
+			 	<value>com.helius.entities.InvoiceAnnexure</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.jdbc.batch_size">50</prop>
+			<!-- <prop key="hibernate.hbm2ddl.auto">create</prop>
+			<prop key="org.hibernate.envers.audit_table_suffix">_AUD</prop>-->
+			</props>
+		</property>
+	</bean>
+	<task:annotation-driven />
+	<bean id="workPermitMaster" class="com.helius.entities.Work_Permit_Master" />
+	<bean id="timesheetService" class="com.helius.dao.TimeSheetAndLeaveServiceImpl">
+		<property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
+	</bean>
+	<bean id="timesheetManager" class="com.helius.managers.TimesheetManager">
+		<property name="timesheetService" ref="timesheetService" />
+	</bean>
+	<bean id="invoiceService" class="com.helius.dao.InvoiceServiceImpl">
+		<property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
+	</bean>
+	<bean id="invoiceManager" class="com.helius.managers.InvoiceManager">
+		<property name="invoiceService" ref="invoiceService" />
+	</bean>
+	<bean id="leaveService" class="com.helius.dao.LeaveServiceImpl">
+		<property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
+	</bean>
+	<bean id="leaveManager" class="com.helius.managers.LeaveManager">
+		<property name="leaveService" ref="leaveService" />
+	</bean>
+	<bean id="beelineService" class="com.helius.dao.BeelineTimesheetService">
+			<property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
+	</bean>
+	<bean id="employee" class="com.helius.entities.Employee" />
+	<bean id="status" class="com.helius.utils.Status" />
+	<bean id="users" class="com.helius.entities.Users" />
+	<bean id="userService" class="com.helius.service.UserServiceImpl">
+		<property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
+	</bean>
+	<bean id="userManager" class="com.helius.managers.UserManager">
+		<property name="userService" ref="userService" />
+	</bean>
+	<bean id="employeeDAO" class="com.helius.dao.EmployeeDAOImpl">
+		<property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
+	</bean>
+	<bean id="clientDAO" class="com.helius.dao.ClientDAOImpl">
+		<property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
+	</bean>
+	<bean id="employeeManager" class="com.helius.managers.EmployeeManager">
+		<property name="employeeDAO" ref="employeeDAO" />
+	</bean>
+	<bean id="sowDAO" class="com.helius.dao.SowDAOImpl">
+		<property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
+	</bean>
+	<bean id="sowManager" class="com.helius.managers.SowManager">
+		<property name="sowDAO" ref="sowDAO" />
+	</bean>
+	<bean id="clientManager" class="com.helius.managers.ClientManager">
+		<property name="clientDAO" ref="clientDAO" />
+	</bean>
+	<bean id="reportManager" class="com.helius.managers.ReportManager">
+				<property name="reportService" ref="reportService" />
+	</bean>
+	<bean id="reportService" class="com.helius.service.ReportDAOImpl">
+		<property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
+	</bean>
+	<bean id="checklistDAO" class="com.helius.dao.ChecklistDAOImpl">
+		<property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
+	</bean>
+	<bean id="checklistManager" class="com.helius.managers.ChecklistManager">
+		<property name="checklistDAO" ref="checklistDAO" />
+	</bean>
+	<bean id="Utils" class="com.helius.utils.Utils">
+	</bean>
+	<bean id="alertService" class="com.helius.dao.EmailAlertsNotification">
+		<property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
+	</bean>
+	<!-- <bean id="userserviceImpl" class="com.websystique.springmvc.service.UserServiceImpl">
+		<constructor-arg ref="hibernate4AnnotatedSessionFactory">
+		</constructor-arg>
+	</bean> -->
+	<bean id="viewresolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- <property name="prefix" value="/views/" /> -->
+		<property name="suffix" value="html" />
+	</bean>
+
+
+</beans>

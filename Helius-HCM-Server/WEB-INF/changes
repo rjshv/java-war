@@ -1,0 +1,56 @@
+-- Changes since 08-03-2019
+List of Prod_Fixes updates till date.
+
+HPITEST-592 : System should allow the user to enter maximum number of characters at candidate name and designation in view update offers
+
+HPITEST-608 : Payroll entity need to be shown in employee view update at Personal or assignment details
+
+HPITEST-596 : chinese name in chinese characters is not viewing at view update offers and at employee creation also
+
+HPITEST-593 : System should allow the user to enter maximum number of characters at employee insurance family member name
+
+HPITEST-590 : Employee name is not taking from view update offers
+
+HPITEST-396 : Offer details must be editable in employee view update
+
+HPITEST-92 : Blood group accepting special charecters.
+
+Fixed few UI Design Issues - 
+
+1) Star mark for mandatory fields in all the dashboards
+2) Changed the order of the sections view in Employee update page
+3) Changed the search text box in Employee Update page
+4) Full Screen view for whole HAP application
+and few minor UI designs.
+
+06-05-2019
+1.	New feature: Now, offer will have a new field set to support for background verification. 
+Support in the offer page to capture background verification fields.
+Background verification required (yes/no)
+If yes, background verification completed (yes/no)
+Date of completion
+Jira CRs : HPITEST-616, HPITEST-617, HPITEST-618, HPITEST-619
+     
+ 2.   HPITEST-621 -- Bug related to unable to enter DOB earlier to 1970 – Fixed.
+ 
+ 
+ 
+ 28-05-2019
+
+HPITEST-637 -- Regarding Sub con & Rebadged employees
+HPITEST-640 - Regarding PC code and Dept code
+HPITEST-636 - adding helius India as payroll entity
+HPITEST-433 - Make dropdown defaults to 'All' in dashboards
+HPITEST-483 - In the actions,set 'none' as default options
+HPITEST-402 - Freezed the declined state in Offers
+HPITEST-563 - In the view update employee insurance details
+HPITEST-685 --Regarding account manager seeing the helius internal employees
+Created Vendor population report
+Fixed CTC issue in appraisal details
+Fixed Bonus issue from offer to appraisal details
+handling citizen for singapore nationality and adding appraisal values
+from offer
+vendor population report
+ 
+ 
+ 
